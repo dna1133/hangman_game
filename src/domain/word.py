@@ -19,3 +19,7 @@ class Word:
     @property
     def letters(self):
         return self._letters
+
+    @property
+    def guessed(self):
+        return all([letter.guessed for letter in self.letters])

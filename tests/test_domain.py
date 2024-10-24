@@ -30,3 +30,10 @@ def test_success_word(test_word="someword"):
 
     word.letters[0].guessed = True
     assert str(word) == "s" + ("*" * (len(test_word) - 1))
+
+
+def test_success_word_guessed():
+    word = Word("sa")
+    word.letters[0].guessed = True
+    word.letters[1].guessed = True
+    assert word.guessed == True

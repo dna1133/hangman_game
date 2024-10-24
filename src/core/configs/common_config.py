@@ -1,1 +1,5 @@
 UKNOWN_LETTER_PLACEHOLDER = "*"
+
+WORD_FILE_PATH = r"static\words.txt"
+
+AMOUNT_OF_ATTEMPS = 6
