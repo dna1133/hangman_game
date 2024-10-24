@@ -10,7 +10,7 @@ class Game:
 
     def new_game(self, test_word: Word | None = None):
         self.guess: str = ""
-        self.guessed_letters: set = {}
+        self.guessed_letters: set = set()
         self.attemps: int = AMOUNT_OF_ATTEMPS
         self.raw_word: list = self._load_words()
         self.raw_word: Word = self._get_word(self.raw_word)

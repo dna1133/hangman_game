@@ -1,6 +1,5 @@
 from abc import ABC
-from dataclasses import dataclass, field
-from functools import lru_cache
+from dataclasses import dataclass
 
 from core.configs.common_config import UKNOWN_LETTER_PLACEHOLDER
 

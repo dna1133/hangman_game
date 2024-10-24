@@ -4,20 +4,19 @@ from core.configs.common_config import AMOUNT_OF_ATTEMPS
 from core.configs.ui_confog import *
 
 
-class Presenter(Protocol):
-    def update_game_dto(self): ...
-
-
 class CLIView:
     def __init__(self):
-        self.stats = {"attemp": AMOUNT_OF_ATTEMPS, "word": ""}
-
-    def init_ui(self, presenter: Presenter):
-        self.stats = presenter.update_game_dto()
+        self._stats = {"attemp": AMOUNT_OF_ATTEMPS, "word": "", "used": ()}
 
     @property
-    def current_status(self):
-        return HANGMAN_PICS.get(self.stats["attemp"])
+    def stats(self):
+        return self._stats
+
+    @stats.setter
+    def stats(self, stats: dict):
+        self._stats["attemp"] = stats["attemp"]
+        self._stats["word"] = stats["word"]
+        self._stats["used"] = stats["used"]
 
     def start_menu(self):
         print(GREETING)
@@ -25,10 +24,12 @@ class CLIView:
         print(MENU_EXIT_GAME)
 
     def display_word(self):
+        print(f"Введенные буквы: {''.join(self.stats['used'])}")
         print(f"Загаданное слово {self.stats['word']}")
+        print(LINE_PH)
 
     def display_status(self):
-        print(self.current_status)
+        print(HANGMAN_PICS.get(self.stats["attemp"]))
 
     def handle_incorrect_menu(self):
         print(MENU_INCORRECT_ANSWER)
@@ -45,8 +46,9 @@ class CLIView:
     def display_result(self, result: str):
         if result == "win":
             print(EVENT_WIN + self.stats["word"])
-        if result == "loose":
+        elif result == "loose":
             print(EVENT_LOOSE + self.stats["word"])
+        print(LINE_PH)
 
     def read_guess(self) -> str:
         return input(EVENT_INPUT)
