@@ -1,4 +1,5 @@
-from domain.letter import Letter, Word
+from domain.letter import Letter
+from domain.word import Word
 import pytest
 
 
